@@ -1,0 +1,61 @@
+make
+g++ -isystem ../../googletest/googletest/include -g -Wall -Wextra -pthread -c ./coder.cpp
+./coder.cpp: In member function ‘void Coder::set(const char*, int)’:
+./coder.cpp:82:36: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  if( buf == 0 || size == 0 || size == std::numeric_limits<unsigned int>::max())
+                                    ^
+g++ -isystem ../../googletest/googletest/include -I. -g -Wall -Wextra -pthread -c ../test/coder_gTest.cpp
+Building coder_gTest for Linux x86_64
+g++ -isystem ../../googletest/googletest/include -g -Wall -Wextra -pthread -lpthread coder.o coder_gTest.o gtest_main.a -o coder_gTest -L. -lencode_linux_x86_64
+./coder_gTest
+Running main() from Coder_gTest.cpp
+[==========] Running 15 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 15 tests from Coder
+[ RUN      ] Coder.sizeof
+[       OK ] Coder.sizeof (0 ms)
+[ RUN      ] Coder.set
+[       OK ] Coder.set (0 ms)
+[ RUN      ] Coder.buf
+[       OK ] Coder.buf (0 ms)
+[ RUN      ] Coder.init_buf
+[       OK ] Coder.init_buf (0 ms)
+[ RUN      ] Coder.init_len
+[       OK ] Coder.init_len (0 ms)
+[ RUN      ] Coder.init_values
+[       OK ] Coder.init_values (0 ms)
+[ RUN      ] Coder.two_coders
+[       OK ] Coder.two_coders (0 ms)
+[ RUN      ] Coder.two_coders2
+[       OK ] Coder.two_coders2 (0 ms)
+[ RUN      ] Coder.destruction
+[       OK ] Coder.destruction (0 ms)
+[ RUN      ] Coder.encode
+[       OK ] Coder.encode (0 ms)
+[ RUN      ] Coder.decode
+[       OK ] Coder.decode (0 ms)
+[ RUN      ] Coder.test_1
+[       OK ] Coder.test_1 (0 ms)
+[ RUN      ] Coder.test_2
+[       OK ] Coder.test_2 (0 ms)
+[ RUN      ] Coder.test_3
+[       OK ] Coder.test_3 (0 ms)
+[ RUN      ] Coder.test_rand
+../test/coder_gTest.cpp:154: Failure
+      Expected: buf[i]
+      Which is: 'S' (83, 0x53)
+To be equal to: *(coder.buf()+i)
+      Which is: '\0'
+i is: 195
+[  FAILED  ] Coder.test_rand (0 ms)
+[----------] 15 tests from Coder (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 15 tests from 1 test case ran. (0 ms total)
+[  PASSED  ] 14 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] Coder.test_rand
+
+ 1 FAILED TEST
+Makefile:117: recipe for target 'coder_gTest' failed
+make: *** [coder_gTest] Error 1
